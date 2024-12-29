@@ -1,3 +1,4 @@
+
 import os
 
 def start_register(name, email, password):
@@ -7,7 +8,8 @@ def start_register(name, email, password):
             file.write(f"{name},{email},{password}\n")
         print('Registrasi Berhasil')
     except Exception as e:
-        print(f"Terjadi kesalahan saat menyimpan data: {e}")
+        print(f"Terjadi kesalahan saat menyimpan data")
+        access_register('start_register')
 
 def email_upi(email):
     return email.endswith('@upi.edu')
@@ -21,12 +23,15 @@ def access_register(option):
             password = input('Masukkan Password baru: ').strip()
             
             if name and email and password:
-                # Validasi panjang username dan password (bebas tergantung kelompok kita menentukannya)
+                # Validasi panjang username dan password(bebas tergntung kelompok kita nentuinnya)
                 if len(name) < 3 or len(password) < 6:
-                    print("Username atau Password tidak memenuhi syarat.")
+                    print("Coba lagi.")
                     continue
                 elif not email_upi(email):
                     print("Email harus menggunakan @upi.edu")
+                    continue
+                elif ',' in name or ',' in email or ',' in password:
+                    print("Nama, email, dan password tidak boleh mengandung koma (,).")
                     continue
 
                 try:
@@ -39,7 +44,7 @@ def access_register(option):
                             return
                         else:
                             start_register(name, email, password)
-                            break # kembali ke menu awal 
+                            break #kembali ke menu awal 
                 except FileNotFoundError:
                     print("Database tidak ditemukan. Membuat database baru.")
                     start_register(name, email, password)

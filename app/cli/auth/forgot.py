@@ -1,7 +1,6 @@
 import os
 from auth.register import email_upi
 
-
 def reset_password(email):
     try:
         if not os.path.exists('./app/cli/data/logindatabase.txt'):
