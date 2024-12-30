@@ -52,16 +52,21 @@ def chat_prodi(prodi, filename):
             else:
                 print('\nDaftar Pertanyaan:')
                 for idx, message in enumerate(messages, start=1):
-                    print(f'{idx}. {message.strip()}')
+                    if message.startswith("Q: "):
+                        print(f"{idx}. {message.strip()}")
                 try:
                     question_idx = int(input('\nPilih nomor pertanyaan untuk dijawab: ')) - 1
                     if 0 <= question_idx < len(messages):
-                        reply = input('Masukkan jawaban Anda: ')
-                        if nama_pegguna and reply:
-                            write_chat(filename, f'A: {nama_pegguna}: {reply}')
-                            print('Jawaban berhasil dikirim!')
+                        question = messages[question_idx].strip()
+                        if question.startswith("Q: "):
+                            reply = input('Masukkan jawaban Anda: ')
+                            if nama_pegguna and reply:
+                                write_chat(filename, f"A: {nama_pegguna}: {reply} (Menjawab:{question})")
+                                print('Jawaban berhasil dikirim!')
+                            else:
+                                print('Jawaban tidak boleh kosong.')
                         else:
-                            print('Jawaban tidak boleh kosong.')
+                            print("Item yang di pilih bukan pertanyaan")
                     else:
                         print('Nomor pertanyaan tidak valid.')
                 except ValueError:
