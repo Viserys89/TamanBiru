@@ -1,5 +1,1 @@
-tamanbiru,tamanbiru@upi.edu,tamanbiru
-rpl,rpl@upi.edu,123456
-yayas,ilyas@upi.edu,yasa;123
-
-daoa,daoa@upi.edu,123456
+tamabiru,tamanbiru@upi.edu,123456
