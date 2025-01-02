@@ -1,4 +1,5 @@
 import os
+import re
 
 def start_register(name, email, password, prodi, semester, notelp):
     try:
@@ -39,6 +40,8 @@ def access_register(option):
                     print("Email harus menggunakan @upi.edu. Coba lagi.")
                 elif ',' in email:
                     print("Email tidak boleh mengandung koma (,). Coba lagi.")
+                elif not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+                    print("Email mengandung karakter ilegal atau emoji. Coba lagi.")
                 else:
                     break
 
