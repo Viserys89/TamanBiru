@@ -4,10 +4,22 @@ def read_chat(filename):
         return []
     with open(filename, 'r', encoding='utf-8') as file:
         return file.readlines()
-
-def write_chat(filename, message):
+def write_pertanyaan(filename, message):
     with open(filename, 'a', encoding='utf-8') as file:
         file.write(message + '\n')
+        
+def write_jawaban(filename, message, question_idx):
+    with open(filename, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+    if question_idx < len(lines):
+        lines.insert(question_idx + 1, f'\t{message}\n') # Jawaban langsung di bawah pertanyaan
+    else:
+        lines.append(F'\t{message}\n')  # Jika indeks tidak valid, tambahkan di akhir
+        
+    # Tulis kembali file 
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.writelines(lines)
 
 def chat_prodi(prodi, filename):
     from report.report import report_message
@@ -32,20 +44,21 @@ def chat_prodi(prodi, filename):
             else:
                 print('\nDaftar Pertanyaan:')
                 for idx, message in enumerate(messages, start=1):
-                    print(f'{idx}. {message.strip()}')
+                    level = message.count('\t') # indentasi jawaban
+                    indent ='   '* level
+                    print(f'{idx}. {indent}{message.strip()}')
 
         elif pilihan == '2':
             from auth.login import nama_pegguna
 
             content = input('Masukkan pertanyaan Anda: ')
             if nama_pegguna and content:
-                write_chat(filename, f'Q: {nama_pegguna}: {content}')
+                write_pertanyaan(filename, f'Q: {nama_pegguna}: {content}')
                 print('Pertanyaan berhasil diajukan!')
             else:
                 print('Nama atau pertanyaan tidak boleh kosong.')
 
         elif pilihan == '3':
-            from auth.login import nama_pegguna
             from auth.login import nama_pegguna
             messages = read_chat(filename)
             if not messages:
@@ -53,41 +66,34 @@ def chat_prodi(prodi, filename):
             else:
                 print('\nDaftar Pertanyaan:')
                 for idx, message in enumerate(messages, start=1):
-                    if message.startswith("Q: "):
-                        print(f"{idx}. {message.strip()}")
+                    level = message.count('\t') # indentasi jawaban
+                    indent ='   '* level
+                    print(f'{idx}. {indent}{message.strip()}')
                 try:
                     question_idx = int(input('\nPilih nomor pertanyaan untuk dijawab: ')) - 1
                     if 0 <= question_idx < len(messages):
                         
                         reply = input('Masukkan jawaban Anda: ')
                         if reply:
-                            write_chat(filename, f' A:{nama_pegguna}: {reply}' )
+                            write_jawaban(filename, f' A:{nama_pegguna}: {reply}', question_idx )
                             print('Jawaban berhasil dikirim!')
                         else:
                             print('Jawaban tidak boleh kosong.')
-                        question = messages[question_idx].strip()
-                        if question.startswith("Q: "):
-                            reply = input('Masukkan jawaban Anda: ')
-                            if nama_pegguna and reply:
-                                write_chat(filename, f"A: {nama_pegguna}: {reply} (Menjawab:{question})")
-                                print('Jawaban berhasil dikirim!')
-                            else:
-                                print('Jawaban tidak boleh kosong.')
-                        else:
-                            print("Item yang di pilih bukan pertanyaan")
                     else:
                         print('Nomor pertanyaan tidak valid.')
                 except ValueError:
                     print('Masukkan angka yang valid.')
         elif pilihan == '4':
             from auth.login import nama_pegguna
-            messages = read_chat(filename)  # filename dinamis sesuai prodi
+            messages = read_chat(filename)  
             if not messages:
                 print('\nBelum ada pesan untuk dilaporkan.')
             else:
                 print('\nPesan Tersimpan:')
-                for i, message in enumerate(messages, start=1):
-                    print(f'{i}. {message.strip()}')
+                for idx, message in enumerate(messages, start=1):
+                    level = message.count('\t') # indentasi jawaban
+                    indent ='   '* level
+                    print(f'{idx}. {indent}{message.strip()}')
                     
                 try:
                     index = int(input('\nMasukkan nomor pesan yang ingin dilaporkan: '))

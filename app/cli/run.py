@@ -38,5 +38,4 @@ def display_main_menu():
             print('Pilihan tidak tersedia.')
 
 if __name__ == '__main__':
-
     display_main_menu()

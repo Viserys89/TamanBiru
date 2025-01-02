@@ -42,6 +42,10 @@ def report_message(message, reporter, chat_file='./app/cli/data/chatAll.txt', li
     # Initialize report entry if not exists
     if normalized_message not in reports:
         reports[normalized_message] = {'count': 0, 'reporters': []}
+    
+    #menambahkan logika sebelum pengembalian
+    if reporter in reports[normalized_message]['reporters']:
+        return 'already_reported'
 
     # Check if the reporter already reported this message
     if reporter in reports[normalized_message]['reporters']:
@@ -58,7 +62,8 @@ def report_message(message, reporter, chat_file='./app/cli/data/chatAll.txt', li
         del reports[normalized_message]  # Remove from reports
 
     save_reports(reports)
-    return reports.get(normalized_message, {}).get('count', 0)
+    return 'success'#
+
 
 def delete_message(message, chat_file):
     normalized_message = message.strip()

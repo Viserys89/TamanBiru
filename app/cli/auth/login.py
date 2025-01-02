@@ -19,6 +19,8 @@ def start_login(name, password):
                     
                     # Ambil kolom sesuai urutan: name, email, password, prodi, semester, notelp
                     a, _, b, _, _, _ = data
+                    # Ambil kolom sesuai urutan: name, email, password, prodi, semester, notelp
+                    a, _, b, _, _, _ = data
                     if a == name and b == password:
                         sukses = True
                         nama_pegguna = name
@@ -65,6 +67,7 @@ def start_login(name, password):
                 else:
                     print("Pilihan tidak tersedia. Silakan pilih opsi yang tersedia.")
                     continue
+
 
 def access_login(option):
     if option == 'start_login':
