@@ -57,12 +57,13 @@ def chat_all():
                     if 1 <= index <= len(messages):
                         reported_message = messages[index - 1].strip()
                         count = report_message(reported_message, reporter=nama_pegguna)
-                        print(f'Pesan berhasil dilaporkan! Total laporan: {count}')
+                        print(f'Pesan berhasil dilaporkan!')
                     else:
                         print('Nomor pesan tidak valid.')
                 except ValueError:
                     print('Input tidak valid.')
 
+                    
         elif pilihan == '4':
             print('Kembali ke menu utama...')
             break

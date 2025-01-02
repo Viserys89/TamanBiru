@@ -1,7 +1,7 @@
 Q: Vicky: Apa itu html?
 A: Hypertext Markup Language
-Q: Febri: UX? 
-Q: tamanbiru: tesss
-A: tamanbiru: sebuah tampilan
-A: tamanbiru: sebuah tampilan (Menjawab:Q: Febri: UX?)
-A: tamanbiru: tessss (Menjawab:Q: Febri: UX?)
+Q: Febri: UX?
+A: User experience adalah bagaimana seorang pengguna merasakan interaksi dan pengalaman menggunakan produk
+A: Iya bener febri
+Q: tamanbiru: halo test
+tamanbiru: iya 

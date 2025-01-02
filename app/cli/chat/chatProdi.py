@@ -46,6 +46,7 @@ def chat_prodi(prodi, filename):
 
         elif pilihan == '3':
             from auth.login import nama_pegguna
+            from auth.login import nama_pegguna
             messages = read_chat(filename)
             if not messages:
                 print('\nBelum ada pertanyaan untuk dijawab.')
@@ -57,6 +58,13 @@ def chat_prodi(prodi, filename):
                 try:
                     question_idx = int(input('\nPilih nomor pertanyaan untuk dijawab: ')) - 1
                     if 0 <= question_idx < len(messages):
+                        
+                        reply = input('Masukkan jawaban Anda: ')
+                        if reply:
+                            write_chat(filename, f' A:{nama_pegguna}: {reply}' )
+                            print('Jawaban berhasil dikirim!')
+                        else:
+                            print('Jawaban tidak boleh kosong.')
                         question = messages[question_idx].strip()
                         if question.startswith("Q: "):
                             reply = input('Masukkan jawaban Anda: ')
@@ -86,13 +94,12 @@ def chat_prodi(prodi, filename):
                     if 1 <= index <= len(messages):
                         reported_message = messages[index - 1].strip()
                         count = report_message(reported_message, reporter=nama_pegguna, chat_file=filename)
-                        print(f'Pesan berhasil dilaporkan! Total laporan: {count}')
+                        print(f'Pesan berhasil dilaporkan!')
                     else:
                         print('Nomor pesan tidak valid.')
                 except ValueError:
                     print('Input tidak valid.')
-
-                
+            
         elif pilihan == '5':
             print('Kembali ke menu utama...')
             break
