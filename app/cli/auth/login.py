@@ -2,8 +2,10 @@ from main.main import start_lobby
 from auth.register import access_register
 from auth.forgot import forgot_password
 
+nama_pegguna = None 
 def start_login(name, password):
-    batas = 3
+    global nama_pegguna 
+    batas = 3  
 
     while batas > 0:
         sukses = False
@@ -17,8 +19,11 @@ def start_login(name, password):
                     
                     # Ambil kolom sesuai urutan: name, email, password, prodi, semester, notelp
                     a, _, b, _, _, _ = data
+                    # Ambil kolom sesuai urutan: name, email, password, prodi, semester, notelp
+                    a, _, b, _, _, _ = data
                     if a == name and b == password:
                         sukses = True
+                        nama_pegguna = name
                         break
 
         except FileNotFoundError:
@@ -62,6 +67,7 @@ def start_login(name, password):
                 else:
                     print("Pilihan tidak tersedia. Silakan pilih opsi yang tersedia.")
                     continue
+
 
 def access_login(option):
     if option == 'start_login':
