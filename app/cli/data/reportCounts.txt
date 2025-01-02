@@ -1,4 +1,2 @@
-raden: hai|1|
-tamanbiru: tutuss|1|tamanbiru
-A: wqwer|1|tamanbiru
-tamanbiru: hai|1|tamanbiru
+tamanbiru: aaa|1|tamanbiru
+Q: tamanbiru: testing 3|1|tamanbiru
