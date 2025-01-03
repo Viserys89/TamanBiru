@@ -1,5 +1,6 @@
 import os
 from report.report import report_message
+from auth.share import get_nama_pengguna
 
 def read_chat():
     if not os.path.exists('./app/cli/data/chatAll.txt'):
@@ -34,16 +35,24 @@ def chat_all():
                     print(f'{idx}. {message.strip()}')
 
         elif pilihan == '2':
-            from auth.login import nama_pegguna
+            nama_pengguna = get_nama_pengguna()
+            if not nama_pengguna:
+                print('Nama pengguna tidak valid.')
+                continue
+
             content = input('Masukkan pesan Anda: ')
-            if nama_pegguna and content:
-                write_chat(f'{nama_pegguna}: {content}')
+            if nama_pengguna and content:
+                write_chat(f'{nama_pengguna}: {content}')
                 print('Pesan berhasil dikirim!')
             else:
                 print('Pesan tidak boleh kosong.')
 
         elif pilihan == '3':
-            from auth.login import nama_pegguna  # Pastikan nama pengguna tersedia
+            nama_pengguna = get_nama_pengguna()
+            if not nama_pengguna:
+                print('Nama pengguna tidak valid.')
+                continue
+
             messages = read_chat()
             if not messages:
                 print('\nBelum ada pesan untuk dilaporkan.')
@@ -56,17 +65,18 @@ def chat_all():
                     index = int(input('\nMasukkan nomor pesan yang ingin dilaporkan: '))
                     if 1 <= index <= len(messages):
                         reported_message = messages[index - 1].strip()
-                        result = report_message(reported_message, reporter=nama_pegguna)
+                        result = report_message(reported_message, reporter=nama_pengguna)
                         if result == "already_reported":
                             print("Anda sudah melaporkan pesan ini.")
+                        elif result == "success":
+                            print("Pesan berhasil dilaporkan.")
                         else:
-                            print("Pesan berhasil dilaporkan")
+                            print(f"Error: {result}")
                     else:
                         print('Nomor pesan tidak valid.')
                 except ValueError:
                     print('Input tidak valid.')
 
-                    
         elif pilihan == '4':
             print('Kembali ke menu utama...')
             break

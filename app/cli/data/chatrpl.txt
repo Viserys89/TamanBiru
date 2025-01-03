@@ -1,9 +1,2 @@
-Q: tamanbiru: Testing 2
-	 A:tamanbiru: mbee
-	 A:tamanbiru: testing jawab 2
-	 A:tamanbiru: testing jawab
-Q: tamanbiru: testing 3
-	 A:Akmal: apa aja
-	 A:tamanbiru: hmmm
-	 A:Akmal: iyaaa
-Q: tamanbiru: testing 4
+Q: Vicky: Apa itu RPL?
+	A: tamanbiru: Rekayasa Perangkat Lunak
