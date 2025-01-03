@@ -65,7 +65,7 @@ def update_password(email, new_password):
         with open('./app/cli/data/logindatabase.txt', 'w') as file:
             file.write('\n'.join(updated_users) + '\n')
     except Exception as e:
-        print(f"Terjadi kesalahan saat memperbarui password: {e}")
+        print(f"Terjadi kesalahan saat memperbaharui password: {e}")
 
 def forgot_password():
     print("== Lupa Password ==")

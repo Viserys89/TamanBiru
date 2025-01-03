@@ -75,7 +75,7 @@ def access_register(option):
                 if not semester.isdigit():
                     print("Semester harus berupa angka. Coba lagi.")
                 elif not (1 <= int(semester) <= 14):
-                    print("Semester tidak valid. Coba lagi.")
+                    print("Semester tidak valid, Coba lagi.")
                 else:
                     break
 
@@ -111,7 +111,7 @@ def access_register(option):
                         print("Email sudah terdaftar. Silahkan ke menu Login.")
                         return
             except FileNotFoundError:
-                print("Database tidak ditemukan. Membuat database baru.")
+                print("Database tidak ditemukan. Silahkan Membuat database baru.")
 
             # Registrasi Data
             start_register(name, email, password, prodi, semester, notelp)
